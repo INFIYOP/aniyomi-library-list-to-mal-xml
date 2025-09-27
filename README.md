@@ -121,7 +121,7 @@ cd ~/Desktop/aniyomi_converter
 3. Tap **Settings** (gear icon)
 4. Scroll down to **Data and Storage**
 5. Scroll to the bottom and find **Export section**
-6. Tap **Library Export**
+6. Tap **Library list**
 7. Choose **CSV format**
 8. Save the file to your computer (usually named `aniyomi_library.csv`)
 9. **Move this file to your aniyomi_converter folder**
