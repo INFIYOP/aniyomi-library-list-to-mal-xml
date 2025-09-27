@@ -26,7 +26,7 @@
 - **DON'T IGNORE THESE!** Copy all skipped titles
 - **Ask AI:** "Find the exact MyAnimeList names for these titles and make a CSV with format: title,type"
 - **Force the AI to find ALL titles** - don't accept "some couldn't be found"
-- The new enhanced tool will try to fix most of these automatically
+- The enhanced tool will try to fix most of these automatically
 
 ---
 
@@ -79,23 +79,21 @@ pip list
 # Should show pandas and requests in the list
 ```
 
-### 3. Download All Script Files
+### 3. Download the Script File
 
-**You need these 3 files in the SAME folder:**
-- `aniyomi_to_mal_master_v2.py` (Enhanced tool - **RECOMMENDED**)
-- `make_mal_import.py` (Basic tool for Step 1)
-- `fast_mal_import.py` (Chunking tool for Step 2)
+**You need ONLY 1 file:**
+- `aniyomi_to_mal_converter.py` (All-in-One Tool - **Everything built-in!**)
+
+**No more multiple files needed!** Everything is in one script.
 
 ### 4. Create Your Working Folder
 
-**IMPORTANT:** All files must be in the same folder for the tools to work properly.
+**IMPORTANT:** All files must be in the same folder for the tool to work properly.
 
 **Create a folder structure like this:**
 ```
 📁 aniyomi_converter/
-    📄 aniyomi_to_mal_master_v2.py
-    📄 make_mal_import.py  
-    📄 fast_mal_import.py
+    📄 aniyomi_to_mal_converter.py (THE ONLY SCRIPT YOU NEED)
     📄 aniyomi_library.csv (your export)
     📄 anime_entries.csv (after splitting)
     📄 manga_entries.csv (after splitting)
@@ -121,7 +119,7 @@ cd ~/Desktop/aniyomi_converter
 3. Tap **Settings** (gear icon)
 4. Scroll down to **Data and Storage**
 5. Scroll to the bottom and find **Export section**
-6. Tap **Library list**
+6. Tap **Library Export**
 7. Choose **CSV format**
 8. Save the file to your computer (usually named `aniyomi_library.csv`)
 9. **Move this file to your aniyomi_converter folder**
@@ -132,7 +130,7 @@ cd ~/Desktop/aniyomi_converter
   - `anime_entries.csv` (anime only)
   - `manga_entries.csv` (manga only)
   - **Keep the same format:** `title,type`
-- **Save both split files in the same folder as your scripts**
+- **Save both split files in the same folder as your script**
 
 **What Aniyomi exports:** Title, Author, Artist, Type (the tool only uses Title and Type)
 
@@ -142,13 +140,16 @@ cd ~/Desktop/aniyomi_converter
 2. Profile → Export My List
 3. Download as XML
 4. Files: `animelist_123456.xml` or `mangalist_123456.xml`
-5. **Save these files in the same folder as your scripts**
+5. **Save these files in the same folder as your script**
 
-## 🚀 How to Use - 3 Methods
+**⚠️ Do I need a demo XML file from MAL?**
+**No!** You don't need any demo or template files. The tool creates everything from scratch. Your existing MAL export is only used to avoid duplicates (optional).
 
-### **METHOD 1: Enhanced Master Tool (RECOMMENDED)**
+## 🚀 How to Use - All-in-One Tool
 
-**What:** Interactive tool with smart matching, real-time logs, and progress saving
+### **SINGLE SCRIPT METHOD (RECOMMENDED)**
+
+**What:** One complete tool with everything built-in - no separate files needed!
 
 **Steps:**
 1. **Open Command Prompt/Terminal**
@@ -156,85 +157,45 @@ cd ~/Desktop/aniyomi_converter
    ```bash
    cd path/to/your/aniyomi_converter
    ```
-3. **Run the enhanced tool:**
+3. **Run the all-in-one tool:**
    ```bash
-   python aniyomi_to_mal_master_v2.py
+   python aniyomi_to_mal_converter.py
    ```
-
-**Features:**
-- 🎨 **Real-time colored logs** (blue/green/yellow/red)
-- 💾 **Never lose progress** - resume from interruptions
-- 🧠 **Smart title matching** - finds titles even with typos/different names
-- 📁 **Auto-saves failed titles** to `failed_titles.json` for manual review
-- ✅ **XML validation** before import
-- 📋 **Interactive menu** - no need to remember commands
 
 **Menu Options:**
 ```
+🚀 ANIYOMI TO MAL CONVERTER - All-in-One Edition
+============================================================
 1. Generate MAL IDs from CSV (Step 1)
-2. Create Import Chunks (Step 2) 
-3. Validate XML Files
-4. Show Conversion Logs
-5. Resume Previous Session
-6. Clear Progress/Cache
-7. Exit
+2. Create Import Chunks from XML (Step 2) 
+3. Full Process (Steps 1 + 2 combined)     ← RECOMMENDED!
+4. Validate XML Files
+5. Show Conversion Logs
+6. Show Progress Statistics
+7. Clear Progress/Cache
+8. Exit
 ```
 
-### **METHOD 2: Two-Step Process (For Large Libraries)**
+### **Three Ways to Use:**
 
-**Make sure you're in the correct folder first:**
-```bash
-cd path/to/your/aniyomi_converter
-```
+#### **Option 1: Step-by-Step**
+1. Choose **"1. Generate MAL IDs from CSV"** first
+2. Then choose **"2. Create Import Chunks from XML"**
 
-**Step 1: Generate MAL IDs**
-```bash
-python make_mal_import.py manga manga_entries.csv mal_manga_import.xml
-python make_mal_import.py anime anime_entries.csv mal_anime_import.xml
-```
+#### **Option 2: Full Process (EASIEST)**
+1. Choose **"3. Full Process"** - does everything automatically!
 
-**Step 2: Create Safe Import Chunks**
-```bash
-python fast_mal_import.py manga mal_manga_import.xml mangalist_123456.xml
-python fast_mal_import.py anime mal_anime_import.xml animelist_123456.xml
-```
-
-### **METHOD 3: Quick Single-Step (Small Libraries Only)**
-
-```bash
-cd path/to/your/aniyomi_converter
-python make_mal_import.py manga manga_entries.csv output.xml
-# Then upload output.xml directly to MAL
-```
+#### **Option 3: Advanced Users**
+1. Use individual steps for more control
 
 ## 📝 Complete Command Reference
 
-### Required File Structure
-**ALL files must be in the same folder:**
-```
-📁 Your working folder/
-    📜 Scripts (required):
-        📄 aniyomi_to_mal_master_v2.py
-        📄 make_mal_import.py  
-        📄 fast_mal_import.py
-    📜 Your input files:
-        📄 anime_entries.csv
-        📄 manga_entries.csv
-        📄 mangalist_123456.xml (optional)
-    📜 Generated files (created by tools):
-        📄 mal_manga_import.xml
-        📄 mal_anime_import.xml  
-        📄 mal_manga_final_chunk_XX.xml
-        📄 failed_titles.json
-        📄 aniyomi_converter.log
-```
-
-### aniyomi_to_mal_master_v2.py (NEW ENHANCED TOOL)
-**Purpose:** All-in-one tool with smart features
+### aniyomi_to_mal_converter.py (ALL-IN-ONE TOOL)
+**Purpose:** Complete converter with everything built-in
 
 **Command:**
 ```bash
-python aniyomi_to_mal_master_v2.py
+python aniyomi_to_mal_converter.py
 ```
 
 **Requirements:**
@@ -243,60 +204,16 @@ python aniyomi_to_mal_master_v2.py
 - Requires `pandas` and `requests` libraries
 
 **What it does:**
-- ✅ Smart title matching (finds 90% more titles than basic tool)
+- ✅ **Step 1:** Generate MAL IDs from your CSV
+- ✅ **Step 2:** Create safe 200-entry chunks for MAL upload
+- ✅ **Option 3:** Do both steps automatically
+- ✅ Smart title matching (finds 90% more titles than basic tools)
 - ✅ Real-time colored progress logs  
 - ✅ Saves progress - resume if interrupted
 - ✅ Creates `failed_titles.json` with unfound titles
-- ✅ Validates XML before you upload
+- ✅ Built-in XML chunking (no separate script needed)
 - ✅ Menu-driven - easy to use
 - ⚠️ **Only imports titles** - sets all to "Plan to Read/Watch"
-
-### make_mal_import.py (BASIC TOOL)
-**Purpose:** Convert CSV to XML with MAL IDs
-
-**Command:**
-```bash
-python make_mal_import.py <anime|manga> <input.csv> <output.xml>
-```
-
-**Examples:**
-```bash
-python make_mal_import.py manga manga_entries.csv mal_manga_import.xml
-python make_mal_import.py anime anime_entries.csv mal_anime_import.xml
-```
-
-**Requirements:**
-- Your split CSV file must be in same folder
-- Internet connection for MAL API lookups
-- `pandas` and `requests` libraries
-
-**What you get:**
-- XML file with MAL IDs in same folder
-- Console output showing found/skipped titles
-- **All entries set to "Plan to Read/Watch" status**
-
-### fast_mal_import.py (FINAL IMPORT TOOL)
-**Purpose:** Create safe 200-entry chunks for MAL upload
-
-**Command:**
-```bash
-python fast_mal_import.py <anime|manga> <mal_xml> <your_mal_export.xml>
-```
-
-**Examples:**
-```bash
-python fast_mal_import.py manga mal_manga_import.xml mangalist_123456.xml
-python fast_mal_import.py anime mal_anime_import.xml animelist_123456.xml
-```
-
-**Requirements:**
-- XML with MAL IDs (from previous step) must be in same folder
-- Your current MAL export (optional, prevents duplicates)
-- All files must be in same folder
-
-**What you get:**
-- Multiple XML files in same folder: `mal_manga_final_chunk_01.xml`, etc.
-- Each file has 200 entries (safe for MAL import)
 
 ## 📁 Complete File Guide
 
@@ -309,23 +226,87 @@ python fast_mal_import.py anime mal_anime_import.xml animelist_123456.xml
 📄 mangalist_123456.xml - Your current MAL manga list (optional)
 ```
 
-### Script Files (You Must Download)
+### Script File (You Must Download)
 ```
-📄 aniyomi_to_mal_master_v2.py - Enhanced tool (RECOMMENDED)
-📄 make_mal_import.py - Basic MAL ID generator  
-📄 fast_mal_import.py - Chunk creator for safe import
+📄 aniyomi_to_mal_converter.py - All-in-One tool (ONLY FILE YOU NEED!)
 ```
 
-### Generated Files (Tools Create These)
+### Generated Files (Tool Creates These)
 ```
-📄 mal_anime_import.xml - Your anime with MAL IDs (Step 1 output)
-📄 mal_manga_import.xml - Your manga with MAL IDs (Step 1 output)
-📄 mal_anime_final_chunk_XX.xml - Import-ready anime chunks (Step 2)
-📄 mal_manga_final_chunk_XX.xml - Import-ready manga chunks (Step 2)
+📄 mal_anime_final_chunk_XX.xml - Import-ready anime chunks
+📄 mal_manga_final_chunk_XX.xml - Import-ready manga chunks  
 📄 aniyomi_converter.log - All conversion logs with timestamps
 📄 conversion_progress.json - Resume data (don't delete during conversion)
 📄 failed_titles.json - Titles that couldn't be matched (IMPORTANT!)
 ```
+
+## 🚀 Complete Step-by-Step Walkthrough
+
+### **STEP 0: Setup (One Time Only)**
+1. **Install Python** with "Add to PATH" checked
+2. **Install libraries:** `pip install pandas requests`
+3. **Create a folder** for all your files (e.g., `aniyomi_converter`)
+4. **Download the script file** and put it in your folder
+
+### **STEP 1: Export from Aniyomi**
+1. **Open Aniyomi app**
+2. **Tap More (...)** at bottom right
+3. **Tap Settings** (gear icon) 
+4. **Scroll to Data and Storage**
+5. **Scroll to Export section** at the bottom
+6. **Tap Library Export** → Choose CSV
+7. **Save the file** to your computer
+8. **Move the file to your aniyomi_converter folder**
+
+### **STEP 2: Prepare Your Files (CRITICAL)**
+1. **Ask AI to split your Aniyomi CSV file** into separate anime/manga files
+2. **Make sure format is correct:** `title,type` (2 columns, no headers)
+3. **Save both split files in your aniyomi_converter folder**
+4. **Download your current MAL lists** and put them in the same folder (optional)
+
+### **STEP 3: Navigate to Your Folder**
+```bash
+# Open Command Prompt/Terminal and navigate to your folder
+cd path/to/your/aniyomi_converter
+
+# Verify you're in the right place (should show your files)
+ls    # Mac/Linux
+dir   # Windows
+```
+
+### **STEP 4: Run the Tool**
+```bash
+python aniyomi_to_mal_converter.py
+```
+
+### **STEP 5: Choose Your Method**
+
+#### **METHOD A: Full Process (EASIEST)**
+1. Choose option **"3. Full Process"**
+2. Enter your CSV file name (e.g., `manga_entries.csv`)
+3. Enter type (`manga` or `anime`)
+4. Enter your existing MAL export (optional)
+5. **Watch it do everything automatically!**
+
+#### **METHOD B: Step-by-Step**
+1. Choose option **"1. Generate MAL IDs from CSV"**
+   - Enter your CSV file name
+   - Enter type and output filename
+   - **Watch the colored logs** - see progress in real-time
+2. Choose option **"2. Create Import Chunks from XML"**
+   - Enter the XML file from Step 1
+   - Enter your existing MAL export (optional)
+   - **Get ready-to-upload chunk files**
+
+### **STEP 6: Upload to MyAnimeList**
+1. Go to [myanimelist.net/panel.php?go=import](https://myanimelist.net/panel.php?go=import)
+2. Upload `mal_manga_final_chunk_01.xml` from your folder
+3. **Wait 3-5 minutes** (IMPORTANT!)
+4. Upload `mal_manga_final_chunk_02.xml`
+5. **Wait 3-5 minutes** (IMPORTANT!)
+6. Repeat for all chunk files
+
+**Result:** All titles will be added to your MAL list with "Plan to Read/Watch" status
 
 ## ⚠️ The failed_titles.json File
 
@@ -355,69 +336,6 @@ python fast_mal_import.py anime mal_anime_import.xml animelist_123456.xml
 - 🟡 **Yellow** = Warning (fuzzy match)
 - 🔴 **Red** = Error (title not found)
 
-## 🚀 Complete Step-by-Step Walkthrough
-
-### **STEP 0: Setup (One Time Only)**
-1. **Install Python** with "Add to PATH" checked
-2. **Install libraries:** `pip install pandas requests`
-3. **Create a folder** for all your files (e.g., `aniyomi_converter`)
-4. **Download the 3 script files** and put them in your folder
-
-### **STEP 1: Export from Aniyomi**
-1. **Open Aniyomi app**
-2. **Tap More (...)** at bottom right
-3. **Tap Settings** (gear icon) 
-4. **Scroll to Data and Storage**
-5. **Scroll to Export section** at the bottom
-6. **Tap Library Export** → Choose CSV
-7. **Save the file** to your computer
-8. **Move the file to your aniyomi_converter folder**
-
-### **STEP 2: Prepare Your Files (CRITICAL)**
-1. **Ask AI to split your Aniyomi CSV file** into separate anime/manga files
-2. **Make sure format is correct:** `title,type` (2 columns, no headers)
-3. **Save both split files in your aniyomi_converter folder**
-4. **Download your current MAL lists** and put them in the same folder (optional)
-
-### **STEP 3: Navigate to Your Folder**
-```bash
-# Open Command Prompt/Terminal and navigate to your folder
-cd path/to/your/aniyomi_converter
-
-# Verify you're in the right place (should show your files)
-ls    # Mac/Linux
-dir   # Windows
-```
-
-### **STEP 4: Run Enhanced Tool**
-```bash
-python aniyomi_to_mal_master_v2.py
-```
-1. Choose option "1. Generate MAL IDs from CSV"
-2. Enter your CSV file name (e.g., `manga_entries.csv`)
-3. Enter type (`manga` or `anime`)
-4. Enter output file name (e.g., `mal_manga_import.xml`)
-5. **Watch the colored logs** - see progress in real-time
-6. **Check `failed_titles.json`** for any missing titles
-
-### **STEP 5: Create Import Chunks**
-```bash
-python fast_mal_import.py manga mal_manga_import.xml mangalist_123456.xml
-```
-1. Tool creates multiple XML files (200 entries each)
-2. Files named: `mal_manga_final_chunk_01.xml`, `mal_manga_final_chunk_02.xml`, etc.
-3. All files saved in your working folder
-
-### **STEP 6: Upload to MyAnimeList**
-1. Go to [myanimelist.net/panel.php?go=import](https://myanimelist.net/panel.php?go=import)
-2. Upload `mal_manga_final_chunk_01.xml` from your folder
-3. **Wait 3-5 minutes** (IMPORTANT!)
-4. Upload `mal_manga_final_chunk_02.xml`
-5. **Wait 3-5 minutes** (IMPORTANT!)
-6. Repeat for all chunk files
-
-**Result:** All titles will be added to your MAL list with "Plan to Read/Watch" status
-
 ## ❌ Common Problems & Solutions
 
 ### "pip is not recognized" Error
@@ -432,7 +350,7 @@ python fast_mal_import.py manga mal_manga_import.xml mangalist_123456.xml
 **Solutions:**
 - **Windows:** Use `py` instead of `python`
 - **Reinstall Python with "Add to PATH" checked**
-- **Full path:** `C:\Python39\python.exe script.py`
+- **Full path:** `C:\Python39\python.exe aniyomi_to_mal_converter.py`
 
 ### "No module named 'pandas'" Error
 **Problem:** Libraries not installed
@@ -453,14 +371,10 @@ python3 -m pip install pandas requests
 - **Use `ls` (Mac/Linux) or `dir` (Windows) to see files**
 - **Check file names match exactly (case-sensitive on Mac/Linux)**
 
-### "Nothing to update" Error on MAL
-**Problem:** MAL says no entries to update  
-**Solution:** Use the two-step process (make_mal_import.py → fast_mal_import.py)
-
 ### Many "Skipped (not found)" Messages  
 **Problem:** Titles don't match MAL exactly
 **Solution:** 
-1. **Use enhanced tool** - it finds most titles automatically
+1. **Tool finds most titles automatically with smart matching**
 2. **Check `failed_titles.json` in your folder** - ask AI to find correct MAL names
 3. **Japanese titles** often need romanization (e.g., "Shingeki no Kyojin" vs "Attack on Titan")
 
@@ -477,30 +391,28 @@ Naruto,manga
 - Comma separated
 - No extra text
 
-### File Too Large Error
-**Problem:** MAL won't accept your XML file  
-**Solution:** Always use `fast_mal_import.py` - it splits into 200-entry chunks
-
 ### Progress Lost Due to Interruption  
 **Problem:** Tool stopped and you lost progress
 **Solution:** 
-1. **Use enhanced tool** - it saves progress automatically in your folder
-2. **Choose option 5** to resume from where you left off
-3. **Never delete `conversion_progress.json`** during conversion
+1. **Tool saves progress automatically in your folder**
+2. **Choose option 6** to see progress statistics
+3. **Restart and continue where you left off**
+4. **Never delete `conversion_progress.json`** during conversion
 
 ## ⏱️ How Long This Takes
 
-| Library Size | Enhanced Tool | Basic Tool | Upload Time |
-|-------------|---------------|------------|-------------|
-| 100 entries | 2-3 minutes | 5-8 minutes | 5 minutes |
-| 500 entries | 8-12 minutes | 15-20 minutes | 15 minutes |
-| 1000+ entries | 15-25 minutes | 30-45 minutes | 30+ minutes |
-| 2000+ entries | 25-40 minutes | 60-90 minutes | 60+ minutes |
+| Library Size | Generate IDs | Create Chunks | Upload Time |
+|-------------|---------------|-------------|-------------|
+| 100 entries | 2-3 minutes | 30 seconds | 5 minutes |
+| 500 entries | 8-12 minutes | 1 minute | 15 minutes |
+| 1000+ entries | 15-25 minutes | 2 minutes | 30+ minutes |
+| 2000+ entries | 25-40 minutes | 3 minutes | 60+ minutes |
 
-**Enhanced tool is faster because:**
+**All-in-one tool is faster because:**
 - ✅ Smart caching and resume
 - ✅ Better title matching (fewer retries)
-- ✅ Optimized API usage
+- ✅ Optimized processing
+- ✅ No file switching between steps
 
 ## 🎉 Success Tips
 
@@ -514,7 +426,7 @@ Naruto,manga
 7. **Understand this only imports titles** - no progress transferred
 
 ### **DURING CONVERSION:**
-8. **Use the enhanced tool** for best results
+8. **Use Option 3 (Full Process) for easiest experience**
 9. **Don't close the terminal** during processing
 10. **Watch the colored logs** to see progress
 11. **Don't ignore failed titles** - most can be fixed
@@ -536,12 +448,11 @@ Naruto,manga
 4. **Wrong folder?** - Use `cd` to navigate to correct folder
 5. **CSV file not split?** - Anime and manga must be separate files
 6. **Wrong CSV format?** - Should be `title,type` with no headers
-7. **Using wrong commands?** - Use enhanced tool for best results
-8. **Skipping failed titles?** - Check `failed_titles.json` and fix them
-9. **Uploading too fast to MAL?** - Wait 3-5 minutes between uploads
-10. **Expecting progress transfer?** - This tool only transfers title names
+7. **Skipping failed titles?** - Check `failed_titles.json` and fix them
+8. **Uploading too fast to MAL?** - Wait 3-5 minutes between uploads
+9. **Expecting progress transfer?** - This tool only transfers title names
 
-**The enhanced tool solves 90% of common problems automatically. Use it!**
+**The all-in-one tool solves 90% of common problems automatically. Use it!**
 
 ## 📋 What Gets Imported vs What Doesn't
 
@@ -566,12 +477,10 @@ Naruto,manga
 
 ---
 
-## 📚 All Tools Summary
+## 📚 Tool Summary
 
-- **`aniyomi_to_mal_master_v2.py`** ← **USE THIS** (enhanced with smart features)
-- **`make_mal_import.py`** ← Basic tool (generates MAL IDs)
-- **`fast_mal_import.py`** ← Final step (creates upload chunks)
+- **`aniyomi_to_mal_converter.py`** ← **THE ONLY FILE YOU NEED** (everything built-in!)
 
-**For most users: Just use the enhanced master tool and follow the interactive menu!**
+**No more multiple files! Everything is in one easy-to-use script with an interactive menu!**
 
 **Remember: ALL files must be in the same folder for everything to work!**
